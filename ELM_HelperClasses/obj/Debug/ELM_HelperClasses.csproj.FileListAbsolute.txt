@@ -1,0 +1,6 @@
+D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\ELM_HelperClasses\bin\Debug\ELM_HelperClasses.dll
+D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\ELM_HelperClasses\bin\Debug\ELM_HelperClasses.pdb
+D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\ELM_HelperClasses\obj\Debug\ELM_HelperClasses.csprojResolveAssemblyReference.cache
+D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\ELM_HelperClasses\obj\Debug\ELM_HelperClasses.csproj.CoreCompileInputs.cache
+D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\ELM_HelperClasses\obj\Debug\ELM_HelperClasses.dll
+D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\ELM_HelperClasses\obj\Debug\ELM_HelperClasses.pdb
