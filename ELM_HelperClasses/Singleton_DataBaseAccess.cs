@@ -21,25 +21,25 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace ELM_HelperClasses
 {
 
-    //[Serializable]
-    public class DataBaseAccess_Singleton
+    [Serializable]
+    class Singleton_DataBaseAccess
     {
 
 //------------------------------------------ Instance Fields -------------------------------------------------------------------
-        private static DataBaseAccess_Singleton dbAccess;
+        private static Singleton_DataBaseAccess dbAccess;
         private List<String> hashtags;
         private List<String> mentions;
         private List<String> SIRaccidents;
-        private List<int> messageIDs;
+
 
 //___________________________________________________________________________________________________________________________________
-        public static DataBaseAccess_Singleton DbAccess
+        public static Singleton_DataBaseAccess DbAccess
         {
             get
             {
                 if (dbAccess == null)
                 {
-                    dbAccess = new DataBaseAccess_Singleton();
+                    dbAccess = new Singleton_DataBaseAccess();
                 }
                 return dbAccess;
             }
@@ -60,17 +60,9 @@ namespace ELM_HelperClasses
             get { return SIRaccidents; }
             set { SIRaccidents = value; }
         }
-        public List<int> MessageIDs
-        {
-            get { return messageIDs; }
-            set { messageIDs = value; }
-        }
-
 //__________________________________________ Class Constructor __________________________________________________________________
-        private DataBaseAccess_Singleton()
+        private Singleton_DataBaseAccess()
         {
-
-
         }
 
 
