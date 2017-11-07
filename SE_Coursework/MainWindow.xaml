@@ -5,31 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ELM_FilteringService"
         mc:Ignorable="d"
-        Title="ELM Filtering Service" Height="592" Width="804" Background="#FF9C9C9C" ResizeMode="NoResize">
+        Title="ELM Filtering Service" Height="666" Width="808" Background="#FF9C9C9C" ResizeMode="NoResize">
     <Grid>
         <Label x:Name="mainTitle" Content="ELM Message Filtering Service" HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Top" FontFamily="MS Office Symbol Semibold" FontSize="36" Background="White" Padding="20,20,20,25" Width="549"/>
         <Label x:Name="sender_lbl" Content="Sender:" HorizontalAlignment="Center" Margin="146,103,535,0" VerticalAlignment="Top" FontFamily="MS Office Symbol Bold" FontSize="22" Background="#FFCDCDCD" Width="115" Padding="10,5,5,10"/>
-        <Label x:Name="sender_lbl_Copy" Content="Message:" HorizontalAlignment="Center" Margin="146,223,536,0" VerticalAlignment="Top" FontFamily="MS Office Symbol Bold" FontSize="22" Background="#FFCDCDCD" Width="114" Padding="10,5,5,10" RenderTransformOrigin="0.043,0.486"/>
-        <TextBox x:Name="senderTXT" HorizontalAlignment="Left" Height="43" Margin="146,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="504" Padding="10,5,0,0" BorderThickness="2" BorderBrush="Black" FontSize="18" FontFamily="Calibri" ScrollViewer.CanContentScroll="True">
+        <Label x:Name="sender_lbl_Copy" Content="Message:" HorizontalAlignment="Center" Margin="146,260,542,0" VerticalAlignment="Top" FontFamily="MS Office Symbol Bold" FontSize="22" Background="#FFCDCDCD" Width="114" Padding="10,5,5,10" RenderTransformOrigin="0.043,0.486"/>
+        <TextBox x:Name="senderTXT" HorizontalAlignment="Left" Height="43" Margin="146,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="504" Padding="10,5,0,0" BorderThickness="2" BorderBrush="Black" FontSize="18" FontFamily="Calibri" ScrollViewer.CanContentScroll="True" TextChanged="senderTXT_TextChanged">
             <TextBox.Effect>
                 <DropShadowEffect Color="#FF0C00FF" BlurRadius="15"/>
             </TextBox.Effect>
         </TextBox>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="178" Margin="146,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="504" BorderBrush="Black" BorderThickness="2" FontSize="18" FontFamily="Calibri" Padding="10,5,0,0">
+        <TextBox x:Name="messageBodyTXT" HorizontalAlignment="Left" Height="178" Margin="146,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="504" BorderBrush="Black" BorderThickness="2" FontSize="18" FontFamily="Calibri" Padding="10,5,0,0" AcceptsReturn="True" AcceptsTab="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextChanged="messageBodyTXT_TextChanged">
             <TextBox.Effect>
                 <DropShadowEffect Color="#FF0C00FF" BlurRadius="15"/>
             </TextBox.Effect>
         </TextBox>
-        <Button x:Name="sendMessageBTN" Content="Send Message" HorizontalAlignment="Left" Margin="146,476,0,0" VerticalAlignment="Top" Width="174" BorderBrush="Black" Background="#FFFFFBFB" Foreground="#FF000CFF" FontFamily="MS Office Symbol Bold" FontSize="20" Padding="10" RenderTransformOrigin="0.5,0.5" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Click="sendMessageBTN_Click">
+        <Button x:Name="sendMessageBTN" Content="Send Message" HorizontalAlignment="Left" Margin="146,530,0,0" VerticalAlignment="Top" Width="174" BorderBrush="Black" Background="#FFFFFBFB" Foreground="#FF000CFF" FontFamily="MS Office Symbol Bold" FontSize="20" Padding="10" RenderTransformOrigin="0.5,0.5" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Click="sendMessageBTN_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="15" Color="#FF0C00FF"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="loadMessagesToProcessBTN" Content="Load Messages From File" Margin="0,476,146,0" VerticalAlignment="Top" Width="264" BorderBrush="Black" Background="#FFFFFBFB" Foreground="#FF000CFF" FontFamily="MS Office Symbol Bold" FontSize="20" Padding="10" RenderTransformOrigin="0.5,0.5" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" HorizontalAlignment="Right">
+        <Button x:Name="loadMessagesToProcessBTN" Content="Load Messages From File" Margin="0,530,152,0" VerticalAlignment="Top" Width="264" BorderBrush="Black" Background="#FFFFFBFB" Foreground="#FF000CFF" FontFamily="MS Office Symbol Bold" FontSize="20" Padding="10" RenderTransformOrigin="0.5,0.5" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" HorizontalAlignment="Right">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="15" Color="#FF0C00FF"/>
             </Button.Effect>
         </Button>
+        <Label x:Name="senderInputWarningLBL" Content="Invalid sender field" HorizontalAlignment="Left" Margin="149,193,0,0" VerticalAlignment="Top" Foreground="Red" Background="#FFCDCCCC" FontSize="16" FontFamily="Trebuchet MS" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <Label x:Name="lblCharactersLeft" Content="Characters left: " HorizontalAlignment="Left" Margin="149,490,0,0" VerticalAlignment="Top" Width="106" FontWeight="Bold"/>
+        <Label x:Name="charactersLeftLBL" Content="0 characters" HorizontalAlignment="Left" Margin="260,490,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.132,-0.192" Width="100" FontWeight="Bold"/>
+        <Label x:Name="subjectLabel" Content="Subject" HorizontalAlignment="Center" Margin="149,205,562,0" VerticalAlignment="Top" FontFamily="MS Office Symbol Bold" FontSize="22" Background="#FFCDCDCD" Width="91" Padding="10,5,5,10" Height="43"/>
+        <TextBox x:Name="emailSubjectTXT" HorizontalAlignment="Left" Height="43" Margin="245,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" Padding="10,5,0,0" BorderThickness="2" BorderBrush="Black" FontSize="18" FontFamily="Calibri" ScrollViewer.CanContentScroll="True">
+            <TextBox.Effect>
+                <DropShadowEffect Color="#FF0C00FF" BlurRadius="15"/>
+            </TextBox.Effect>
+        </TextBox>
 
     </Grid>
 </Window>
