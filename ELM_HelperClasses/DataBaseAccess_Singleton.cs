@@ -29,6 +29,7 @@ namespace ELM_HelperClasses
         private static DataBaseAccess_Singleton dbAccess;
         private List<String> hashtags;
         private List<String> mentions;
+        private List<String> quarantinedURLs;
         private List<String> SIRaccidents;
         private List<int> messageIDs;
 
@@ -65,11 +66,16 @@ namespace ELM_HelperClasses
             get { return messageIDs; }
             set { messageIDs = value; }
         }
+        public List<string> QuarantinedURLs
+        {
+            get { return quarantinedURLs; }
+            set { quarantinedURLs = value; }
+        }
 
 //__________________________________________ Class Constructor __________________________________________________________________
         private DataBaseAccess_Singleton()
         {
-
+            ReadDB_OnStartup();
 
         }
 
@@ -79,15 +85,14 @@ namespace ELM_HelperClasses
         //this method will read all stored data when the program starts
         public void ReadDB_OnStartup()
         {
-
+            quarantinedURLs = new List<string>();
             try
             {
 
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+
             }
         }
 
@@ -101,8 +106,7 @@ namespace ELM_HelperClasses
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+
             }
         }
     }

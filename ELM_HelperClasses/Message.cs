@@ -27,8 +27,6 @@ namespace ELM_HelperClasses
 
         public abstract String sender { get; set; }
 
-        public abstract int bodyMAX_Length { get; set; }
-
 //__________________________________________ Class Constructor __________________________________________________________________
 
         protected Message()
@@ -45,6 +43,6 @@ namespace ELM_HelperClasses
             return expandedAbbreviation;
         }
 
-        
+       // public abstract static bool ValidateData();
     }
 }
