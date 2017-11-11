@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ELM_HelperClasses;
+using SE_Coursework;
 
 
 namespace ELM_FilteringService
@@ -32,6 +33,7 @@ namespace ELM_FilteringService
         private String messageBody;
         private int messageMaximumLength;
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -44,16 +46,14 @@ namespace ELM_FilteringService
             subjectLabel.Visibility = Visibility.Hidden;
             sendingLoadingErrorMessage.Visibility = Visibility.Hidden;
             sendMessageBTN.IsEnabled = false;
+            
         }
 
 
         //logic that happens when user tries to send the message
         private void sendMessageBTN_Click(object sender, RoutedEventArgs e)
         {
-            //surrounded with try catch in case if somehow there would be no sender input content
-            try
-            {
-                senderInputContent = senderTXT.Text;
+                //senderInputContent = senderTXT.Text;
                 //trying to create message ID only if the input is valid
                 String messageID = createMessageID();
                 
@@ -75,19 +75,21 @@ namespace ELM_FilteringService
                         sendingLoadingErrorMessage.Visibility = Visibility.Visible;
                         sendingLoadingErrorMessage.Content = MessageFactory.sendingMessageError;
                     }
+                    else
+                    {
+                        //when the objects were created and messages processed all the lists are saved to the file to avoid loosing any data
+                        messageToSend.processMessage();
+                        String json = messageToSend.exportToJSON();
+                        dbAccess.SaveFiles();
+                        senderTXT.Clear();
+                        messageBodyTXT.Clear();
+                        emailSubjectTXT.Clear();
+                        Window sentMessageOutput = new SentMessageOutput(json);
+                        sentMessageOutput.ShowDialog();
+                    }
 
                 }
-                //MessageBox.Show(messageID);
-            }
-            //user cannot click the button if sender field is empty.
-            //however if this would be somehow possible this catch block will catch it
-            catch (Exception exception)
-            {
-                sendingLoadingErrorMessage.Visibility = Visibility.Visible;
-                sendingLoadingErrorMessage.Content =
-                   "Please enter valid sender as Phone Number, Tweeter ID or email address";
-                MessageBox.Show(exception.ToString());
-            }
+
 
         }
 
@@ -235,6 +237,11 @@ namespace ELM_FilteringService
         private void emailSubjectTXT_TextChanged(object sender, TextChangedEventArgs e)
         {
             sendingLoadingErrorMessage.Visibility = Visibility.Hidden;
+        }
+
+        private void loadMessagesToProcessBTN_Click(object sender, RoutedEventArgs e)
+        {
+            dbAccess.countHashtagOccurrences();
         }
     }
 }

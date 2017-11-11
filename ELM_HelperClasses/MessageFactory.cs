@@ -1,5 +1,8 @@
 ﻿using System;
 
+using System.Windows;
+
+
 namespace ELM_HelperClasses
 {
     public class MessageFactory
@@ -12,15 +15,29 @@ namespace ELM_HelperClasses
 
             if (firstLetter == 83)
             {
-                return SMS.ValidateBeforeCreatingSms(header, messageBody, sender);
+                SMS currentSms = SMS.ValidateBeforeCreatingSms(header, messageBody, sender);
+                
+                //MessageBox.Show(json);
+                return currentSms;
             }
             if (firstLetter == 84)
             {
-                return Tweet.ValidateBeforeCreatingSms(header, messageBody, sender);
+                Tweet currentTweet = Tweet.ValidateBeforeCreatingSms(header, messageBody, sender);
+                if (currentTweet != null)
+                {
+                    
+                    
+                }
+                return currentTweet;
             }
             if (firstLetter == 69)
             {
-                return Email.ValidateBeforeCreatingEmail(header, messageBody, sender, subject);
+                Email currentEmail = Email.ValidateBeforeCreatingEmail(header, messageBody, sender, subject);
+                if (currentEmail != null)
+                {
+                    
+                }
+                return currentEmail;
             }
             return null;
         }

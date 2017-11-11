@@ -14,6 +14,9 @@
 
 
 using System;
+using System.Windows;
+using System.Web.Script.Serialization;
+
 
 namespace ELM_HelperClasses
 {
@@ -40,7 +43,9 @@ namespace ELM_HelperClasses
 //__________________________________________ Class Constructor __________________________________________________________________
         private Tweet(String header, String messageBody, String sender)
         {
-
+            this.header = header;
+            body = messageBody;
+            this.sender = sender;
         }
 
         public static Tweet ValidateBeforeCreatingSms(String header, String messageBody, String sender)
@@ -68,24 +73,36 @@ namespace ELM_HelperClasses
 
         //|||||||||||||||||||||||||||||||||||||||||| Instance Methods |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-        protected override void exportToJSON()
+
+
+        public override void processMessage()
         {
-            throw new System.NotImplementedException();
+            String[] bodySplitForWords = body.Split("\t\n ".ToCharArray());
+            foreach (string word in bodySplitForWords)
+            {
+                if (word.StartsWith("@"))
+                {
+                    addMentionToList(word);
+                }
+                if (word.StartsWith("#"))
+                {
+                    addHastagToList(word);
+                }
+            }
+            processTextspeakInMessageBody();
+
         }
 
-        protected override void processMessage()
+        public void addHastagToList(String hashtag)
         {
-            throw new System.NotImplementedException();
+            dataBaseAccess.Hashtags.Add(hashtag);
         }
 
-        public void addHastagToList()
+        public void addMentionToList(String mention)
         {
-            
+            dataBaseAccess.Mentions.Add(mention);
         }
 
-        public void addMentionToList()
-        {
-            
-        }
+
     }
 }

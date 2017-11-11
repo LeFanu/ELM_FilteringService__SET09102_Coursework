@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -38,6 +39,11 @@ namespace ELM_HelperClasses
             set { subject = value; }
         }
 
+        public EmailType TypeOfEmail
+        {
+            get { return typeOfEmail; }
+        }
+
 //__________________________________________ Class Constructor __________________________________________________________________
 
         private Email(String header, String messageBody, String sender, String subject)
@@ -47,7 +53,6 @@ namespace ELM_HelperClasses
             this.subject = subject;
             body = messageBody;
             typeOfEmail = checkEmailType(subject);
-            quarantineURL();
         }
 
         public static Email ValidateBeforeCreatingEmail(String header, String messageBody, String sender, String subject)
@@ -95,17 +100,18 @@ namespace ELM_HelperClasses
 
         //|||||||||||||||||||||||||||||||||||||||||| Instance Methods |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-        protected override void processMessage()
+        public override void processMessage()
         {
-            throw new System.NotImplementedException();
+            quarantineURL();
+            if (typeOfEmail == EmailType.SignificantIncidentReport)
+            {
+                saveIncidentToSIRList();
+            }
         }
 
-        protected override void exportToJSON()
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public void quarantineURL()
+
+        private void quarantineURL()
         {
             String quarantinedMessageBody = "";
             String quarantine = "<URLquarantined>";
@@ -121,14 +127,21 @@ namespace ELM_HelperClasses
                 }
                 quarantinedMessageBody += (s + " ");
             }
-            MessageBox.Show(quarantinedMessageBody);
             body = quarantinedMessageBody;
         }
 
-        public void saveIncidentToSIRList()
+        private void saveIncidentToSIRList()
         {
-           
-            dataBaseAccess.SiRaccidents.Add();
+            //Split body content into lines to extract first two
+            String[] bodyInLines = Regex.Split(body, "[\r\n]+");
+            //save first line of the body as incident code
+            String sportCentreIncidentCode = bodyInLines[0];
+            //save second line of the body as nature of incident
+            String natureOfIncident = bodyInLines[1];
+            //MessageBox.Show();
+
+
+            dataBaseAccess.SiRaccidents.Add(sportCentreIncidentCode + ", " + natureOfIncident);
 
         }
 

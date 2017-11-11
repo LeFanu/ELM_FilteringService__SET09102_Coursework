@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Web.Script.Serialization;
+
 
 namespace ELM_HelperClasses
 {
@@ -33,7 +35,9 @@ namespace ELM_HelperClasses
 
         private SMS(String header, String messageBody, String sender)
         {
-            
+            this.header = header;
+            body = messageBody;
+            this.sender = sender;
         }
 
         public static SMS ValidateBeforeCreatingSms(String header, String messageBody, String sender)
@@ -59,15 +63,11 @@ namespace ELM_HelperClasses
         }
 //|||||||||||||||||||||||||||||||||||||||||| Instance Methods |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-        protected override void processMessage()
+        public override void processMessage()
         {
-            throw new System.NotImplementedException();
+            processTextspeakInMessageBody();
 
         }
 
-        protected override void exportToJSON()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
