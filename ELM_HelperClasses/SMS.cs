@@ -1,6 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Web.Script.Serialization;
+using System.Windows;
 
 
 namespace ELM_HelperClasses
@@ -17,7 +21,7 @@ namespace ELM_HelperClasses
    *
    ** Last Update: 27/10/2017
    */
-
+   [DataContract]
     public class SMS : Message
     {
 
@@ -25,9 +29,11 @@ namespace ELM_HelperClasses
 //------------------------------------------ Instance Fields -------------------------------------------------------------------
 
         DataBaseAccess_Singleton dataBaseAccess = DataBaseAccess_Singleton.DbAccess;
-
+        [DataMember]
         public override string header { get; set; }
+        [DataMember]
         public override string body { get; set; }
+        [DataMember]
         public override string sender { get; set; }
         public static int bodyMAX_Length = 140;
 
@@ -67,6 +73,24 @@ namespace ELM_HelperClasses
         {
             processTextspeakInMessageBody();
 
+        }
+
+        public String exportToJSON()
+        {
+            //String json = new JavaScriptSerializer().Serialize(this);
+            MemoryStream stream1 = new MemoryStream();
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(SMS));
+            ser.WriteObject(stream1, this);
+            stream1.Position = 0;
+            StreamReader sr = new StreamReader(stream1);
+
+            // "{\"Description\":\"Share Knowledge\",\"Name\":\"C-sharpcorner\"}"  
+            string json = sr.ReadToEnd();
+            MessageBox.Show(json);
+            sr.Close();
+            stream1.Close();
+            dataBaseAccess.SaveJSONfile(json);
+            return json;
         }
 
     }

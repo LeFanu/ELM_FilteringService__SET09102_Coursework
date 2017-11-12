@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -20,11 +21,18 @@ using System.Web.Script.Serialization;
 
 namespace ELM_HelperClasses
 {
+    [DataContract]
+    [KnownType(typeof(SMS))]
+    [KnownType(typeof(Tweet))]
+    [KnownType(typeof(Email))]
     public abstract class Message
     {
         DataBaseAccess_Singleton dbAccess = DataBaseAccess_Singleton.DbAccess;
+        [DataMember]
         public abstract String header { get; set; }
+        [DataMember]
         public abstract String body { get; set; }
+        [DataMember]
         public abstract String sender { get; set; }
 
 //__________________________________________ Class Constructor __________________________________________________________________
@@ -38,6 +46,7 @@ namespace ELM_HelperClasses
         public String exportToJSON()
         {
             String json = new JavaScriptSerializer().Serialize(this);
+
             dbAccess.SaveJSONfile(json);
             return json;
         }

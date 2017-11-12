@@ -17,3 +17,5 @@ D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_Filtering
 D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\SE_Coursework\obj\Debug\SE_Coursework.pdb
 D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\SE_Coursework\obj\Debug\SentMessageOutput.g.cs
 D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\SE_Coursework\obj\Debug\SentMessageOutput.baml
+D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\SE_Coursework\obj\Debug\InputSessionDisplay.g.cs
+D:\Moje Dokumenty\Visual Studio 2017\Projects\ELM_FilteringService\ELM_FilteringService__SET09102_Coursework\SE_Coursework\obj\Debug\InputSessionDisplay.baml

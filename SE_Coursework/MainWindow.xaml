@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ELM_FilteringService"
         mc:Ignorable="d"
-        Title="ELM Filtering Service" Height="746" Width="808" Background="#FF9C9C9C" ResizeMode="NoResize">
+        Title="ELM Filtering Service" Height="746" Width="808" Background="#FF9C9C9C" ResizeMode="NoResize" Closed="ELM_Filtering_Service_Closed">
     <Grid>
         <Label x:Name="mainTitle" Content="ELM Message Filtering Service" HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Top" FontFamily="MS Office Symbol Semibold" FontSize="36" Background="White" Padding="20,20,20,25" Width="549"/>
         <Label x:Name="sender_lbl" Content="Sender:" HorizontalAlignment="Center" Margin="146,103,535,0" VerticalAlignment="Top" FontFamily="MS Office Symbol Bold" FontSize="22" Background="#FFCDCDCD" Width="115" Padding="10,5,5,10"/>

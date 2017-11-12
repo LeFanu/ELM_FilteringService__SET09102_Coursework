@@ -14,12 +14,14 @@
 
 
 using System;
+using System.Runtime.Serialization;
 using System.Windows;
 using System.Web.Script.Serialization;
 
 
 namespace ELM_HelperClasses
 {
+    [DataContract]
     public class Tweet : Message
     {
 
@@ -33,8 +35,11 @@ namespace ELM_HelperClasses
             set => MAXsenderLength = value;
         }
 
+        [DataMember]
         public override string header { get; set; }
+        [DataMember]
         public override string body { get; set; }
+        [DataMember]
         public override string sender { get; set; }
         public static int messageMAX_Length = 140;
 

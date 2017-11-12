@@ -250,28 +250,6 @@ namespace ELM_HelperClasses
             
         }
 
-        public void countHashtagOccurrences()
-        {
 
-            var g = hashtags.GroupBy(i => i);
-            String occurences = "";
-            foreach (var grp in g)
-            {
-                occurences += "\nHashtag name: " + grp.Key + " -  Popularity: " +  grp.Count();
-            }
-            MessageBox.Show(occurences);
-        }
-
-        public void countMentionsgOccurrences()
-        {
-
-            var g = mentions.GroupBy(i => i);
-            String occurences = "";
-            foreach (var grp in g)
-            {
-                occurences += "\nHashtag name: " + grp.Key + " -  Popularity: " + grp.Count();
-            }
-            MessageBox.Show(occurences);
-        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -22,6 +23,7 @@ using System.Windows.Forms;
 
 namespace ELM_HelperClasses
 {
+    [DataContract]
     public class Email : Message
     {
 
@@ -30,8 +32,11 @@ namespace ELM_HelperClasses
         private String subject;
         private EmailType typeOfEmail;
         public static int messageMAX_Length = 1028;
+        [DataMember]
         public override string header { get; set; }
+        [DataMember]
         public override string body { get; set; }
+        [DataMember]
         public override string sender { get; set; }
         public string Subject
         {
