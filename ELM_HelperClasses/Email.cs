@@ -29,6 +29,8 @@ namespace ELM_HelperClasses
 
 //------------------------------------------ Instance Fields -------------------------------------------------------------------
         DataBaseAccess_Singleton dataBaseAccess = DataBaseAccess_Singleton.DbAccess;
+
+        private NatureOfIncident natureOfIncident;
         private String subject;
         private EmailType typeOfEmail;
         public static int messageMAX_Length = 1028;
@@ -56,7 +58,7 @@ namespace ELM_HelperClasses
             this.header = header;
             this.sender = sender;
             this.subject = subject;
-            body = messageBody;
+            body = @""+messageBody;
             typeOfEmail = checkEmailType(subject);
         }
 
@@ -86,11 +88,20 @@ namespace ELM_HelperClasses
             //checking SIR email subject format
             if (subject.StartsWith("SIR"))
             {
-                String sirDateString = subject.Substring(4);
+                String sirDateString = "";
+                try
+                {
+                    //checking format of the date
+                    sirDateString = subject.Substring(4);
+                }
+                catch (Exception)
+                {
+
+                }
                 DateTime sirDate = new DateTime();
                 if (!DateTime.TryParse(sirDateString, out sirDate))
                 {
-                    MessageFactory.sendingMessageError += "\nInvalid format of the SIR email message. ";
+                    MessageFactory.sendingMessageError += "\nInvalid format of the SIR email message. Date is wrong or missing. ";
                     return null;
                 }
                 if(sirDate.Year > DateTime.Now.Year)
@@ -98,9 +109,80 @@ namespace ELM_HelperClasses
                     MessageFactory.sendingMessageError += "\nDate of accident cannot be set in future. ";
                     return null;
                 }
-            }
+                //--------------------------------------------------------------------------------------------------------------
+                //Check sports centre format
+                string sportCentreCode;
+                Regex codePattern = new Regex(@"^\d{2}-\d{3}-\d{2}$");
+                try
+                {
+                    //checking if Sports centre code is in proper format
+                    sportCentreCode = messageBody.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    //splitting the string after colon and following space to get just the code of incident
+                    sportCentreCode = sportCentreCode.Substring(sportCentreCode.IndexOf(':') + 2);
+                }
+                catch (Exception)
+                {
+                    MessageFactory.sendingMessageError +=
+                        "\nPlease enter valid Sports Centre Code in suggested format. Only digits. ";
+                    return null;
+                }
 
+                bool validSportsCentreCode = codePattern.IsMatch(sportCentreCode);
+                if (!validSportsCentreCode)
+                {
+                    MessageFactory.sendingMessageError += "\nPlease enter valid Sports Centre Code in suggested format. Only digits. ";
+                    return null;
+                }
+
+
+
+                //---------------------------------------------------------------------------------------------------------
+                //Check Nature of Incident Format
+                string natureOfIncident = "";
+                //in case if string would be empty
+                try
+                {
+
+                    //checking if Nature of the incident is one of the accepted ones
+                    natureOfIncident =
+                        messageBody.Split(new char[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries)[1];
+                    //splitting the string after colon and following space to get just the code of incident
+                    natureOfIncident = natureOfIncident.Substring(natureOfIncident.IndexOf(':') + 2);
+                    //comparing our string with accepted incidents
+                    
+                }
+                catch (Exception)
+                {
+                    MessageFactory.sendingMessageError += "Please supply Nature Of Incident from the accepted list";
+                    return null;
+                }
+                bool validIncindent = iterateNOI(natureOfIncident);
+                if (!validIncindent)
+                {
+                    MessageFactory.sendingMessageError +=
+                        "\nPlease enter valid Incident. From the list of accepted ones. ";
+                    return null;
+                }
+              
+            }
             return new Email(header, messageBody, sender, subject);
+        }
+
+
+        private static bool iterateNOI(String incident)
+        {
+            Type type = typeof(NatureOfIncident); // MyClass is static class with static properties
+            foreach (var p in type.GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public))
+            {
+                var v = p.GetValue(null); // static classes cannot be instanced, so use null...
+                //do something with v
+
+                if (incident.Equals(v.ToString()))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         //|||||||||||||||||||||||||||||||||||||||||| Instance Methods |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -138,15 +220,24 @@ namespace ELM_HelperClasses
         private void saveIncidentToSIRList()
         {
             //Split body content into lines to extract first two
-            String[] bodyInLines = Regex.Split(body, "[\r\n]+");
+            string sportsCentreCode = body.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)[0];
+            sportsCentreCode = sportsCentreCode.Substring(sportsCentreCode.IndexOf(':') + 2);
             //save first line of the body as incident code
-            String sportCentreIncidentCode = bodyInLines[0];
+            //String sportCentreIncidentCode = bodyInLines[0];
             //save second line of the body as nature of incident
-            String natureOfIncident = bodyInLines[1];
-            //MessageBox.Show();
+            string natureOfIncident = "";
+            try
+            {
+                natureOfIncident =
+                    body.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                natureOfIncident = natureOfIncident.Substring(natureOfIncident.IndexOf(':') + 2);
+            }
+            catch (Exception )
+            {
+            }
 
 
-            dataBaseAccess.SiRaccidents.Add(sportCentreIncidentCode + ", " + natureOfIncident);
+            dataBaseAccess.SiRaccidents.Add(sportsCentreCode + ", " + natureOfIncident);
 
         }
 

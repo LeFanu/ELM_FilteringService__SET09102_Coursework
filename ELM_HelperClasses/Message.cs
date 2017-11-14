@@ -37,9 +37,6 @@ namespace ELM_HelperClasses
 
 //__________________________________________ Class Constructor __________________________________________________________________
 
-        protected Message()
-        {
-        }
 
         public abstract void processMessage();
 

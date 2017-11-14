@@ -64,7 +64,7 @@ namespace ELM_FilteringService
                 {
                     senderInputWarningLBL.Visibility = Visibility.Visible;
                     senderInputWarningLBL.Content =
-                        "Please enter valid sender as Phone Number, Tweeter ID or email address";
+                        "Please enter valid sender as Phone Number(starting with 0 or +), Tweeter ID or email address";
                 }
                 else
                 {
@@ -169,7 +169,7 @@ namespace ELM_FilteringService
                 sendMessageBTN.IsEnabled = IsEnabled;
                 char firstCharacter = senderTXT.Text[0];
 
-                if (firstCharacter == 64)
+                if (firstCharacter == 64 && senderTXT.Text.Substring(1).All(char.IsLetter))
                 {
                     //this is a Tweet
                     isTweet = true;
@@ -179,6 +179,10 @@ namespace ELM_FilteringService
                 else
                 {
                     isTweet = false;
+                    if (!isSMS)
+                    {
+                        senderTXT.MaxLength = 160;
+                    }
                 }
                 if (checkIfPhoneNumber(senderTXT.Text))
                 {
@@ -188,6 +192,10 @@ namespace ELM_FilteringService
                 }
                 else
                 {
+                    if (!isTweet)
+                    {
+                        senderTXT.MaxLength = 160;
+                    }
                     isSMS = false;
                 }
                 if (checkIfItIsAnEmail(senderTXT.Text))
@@ -199,12 +207,15 @@ namespace ELM_FilteringService
                     emailSubjectTXT.Visibility = Visibility.Visible;
                     subjectLabel.Visibility = Visibility.Visible;
                     emailSubjectTXT.MaxLength = 20;
+                    
+                       
                 }
                 else
                 {
                     isEmail = false;
                     emailSubjectTXT.Visibility = Visibility.Hidden;
                     subjectLabel.Visibility = Visibility.Hidden;
+                    messageBodyTXT.Clear();
                 }
                 charactersLeftLBL.Visibility = Visibility.Visible;
             }
@@ -231,6 +242,7 @@ namespace ELM_FilteringService
         private void messageBodyTXT_TextChanged(object sender, TextChangedEventArgs e)
         {
             calculateMessageBodyRemainingCharacters();
+            sendingLoadingErrorMessage.Visibility = Visibility.Hidden;
         }
 
         private void calculateMessageBodyRemainingCharacters()
@@ -241,6 +253,15 @@ namespace ELM_FilteringService
         private void emailSubjectTXT_TextChanged(object sender, TextChangedEventArgs e)
         {
             sendingLoadingErrorMessage.Visibility = Visibility.Hidden;
+            if (emailSubjectTXT.Text.StartsWith("SIR"))
+            {
+                messageBodyTXT.Text =
+                    "Sport Centre Code: nn-nnn-nn(please use this number format)\nNature of Incident: (one of the accepted ones)";
+            }
+            else
+            {
+                messageBodyTXT.Clear();
+            }
         }
 
         private void loadMessagesToProcessBTN_Click(object sender, RoutedEventArgs e)
