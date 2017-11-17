@@ -7,17 +7,6 @@ using System.Windows;
 
 /** Author: Karol Pasierb - Software Engineering - 40270305
    * Created by Karol Pasierb on 2017/10/08
-   *
-   ** Description:
-   *   
-   ** Future updates:
-   *   
-   ** Design Patterns Used:
-   *   This class is a Singleton as we need only one helper class to access the database
-   *   All of the objects will use the same data and there is no need for more classess to access it
-   *   Also more instances of this class would only complicate things
-   *
-   ** Last Update: 27/10/2017
    */
 
 
@@ -35,7 +24,6 @@ namespace ELM_HelperClasses
         private List<String> quarantinedURLs = new List<String>();
         private List<String> SIRaccidents = new List<String>();
         private Dictionary<String, String> textSpeakAbbreviations = new Dictionary<String, String>();
-        private List<int> messageIDs;
         private String[] textspeak;
 
 //___________________________________________________________________________________________________________________________________

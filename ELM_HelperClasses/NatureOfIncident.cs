@@ -2,15 +2,6 @@
 {
     /** Author: Karol Pasierb - Software Engineering - 40270305
    * Created by Karol Pasierb on 2017/10/08
-   *
-   ** Description:
-   *   
-   ** Future updates:
-   *   
-   ** Design Patterns Used:
-   *   
-   *
-   ** Last Update: 27/10/2017
    */
 
     public sealed class NatureOfIncident

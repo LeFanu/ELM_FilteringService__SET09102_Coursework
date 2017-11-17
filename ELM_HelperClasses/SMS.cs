@@ -1,41 +1,31 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using System.Web.Script.Serialization;
-using System.Windows;
+
 
 
 namespace ELM_HelperClasses
 {
     /** Author: Karol Pasierb - Software Engineering - 40270305
    * Created by Karol Pasierb on 2017/10/08
-   *
-   ** Description:
-   *   
-   ** Future updates:
-   *   
-   ** Design Patterns Used:
-   *   
-   *
-   ** Last Update: 27/10/2017
    */
-   [DataContract]
+    [DataContract(Namespace = "ELM_HelperClassesJSON")]
     public class SMS : Message
     {
 
 
 //------------------------------------------ Instance Fields -------------------------------------------------------------------
+public static int bodyMAX_Length = 140;
 
-        DataBaseAccess_Singleton dataBaseAccess = DataBaseAccess_Singleton.DbAccess;
         [DataMember]
         public override string header { get; set; }
         [DataMember]
         public override string body { get; set; }
         [DataMember]
         public override string sender { get; set; }
-        public static int bodyMAX_Length = 140;
+
+
+        
 
 //__________________________________________ Class Constructor __________________________________________________________________
 
@@ -75,23 +65,6 @@ namespace ELM_HelperClasses
 
         }
 
-        public String exportToJSON()
-        {
-            //String json = new JavaScriptSerializer().Serialize(this);
-            MemoryStream stream1 = new MemoryStream();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(SMS));
-            ser.WriteObject(stream1, this);
-            stream1.Position = 0;
-            StreamReader sr = new StreamReader(stream1);
-
-            // "{\"Description\":\"Share Knowledge\",\"Name\":\"C-sharpcorner\"}"  
-            string json = sr.ReadToEnd();
-            MessageBox.Show(json);
-            sr.Close();
-            stream1.Close();
-            dataBaseAccess.SaveJSONfile(json);
-            return json;
-        }
 
     }
 }

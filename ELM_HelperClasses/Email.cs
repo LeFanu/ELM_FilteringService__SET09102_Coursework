@@ -1,29 +1,17 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
+
 
 
 /** Author: Karol Pasierb - Software Engineering - 40270305
    * Created by Karol Pasierb on 2017/10/08
-   *
-   ** Description:
-   *   
-   ** Future updates:
-   *   
-   ** Design Patterns Used:
-   *   
-   *
-   ** Last Update: 27/10/2017
    */
 
 
 namespace ELM_HelperClasses
 {
-    [DataContract]
+    [DataContract(Namespace = "ELM_HelperClassesJSON")]
     public class Email : Message
     {
 
@@ -31,6 +19,8 @@ namespace ELM_HelperClasses
         DataBaseAccess_Singleton dataBaseAccess = DataBaseAccess_Singleton.DbAccess;
 
         private NatureOfIncident natureOfIncident;
+
+        [DataMember]
         private String subject;
         private EmailType typeOfEmail;
         public static int messageMAX_Length = 1028;

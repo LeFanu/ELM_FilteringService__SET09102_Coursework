@@ -1,27 +1,17 @@
 ﻿
 /** Author: Karol Pasierb - Software Engineering - 40270305
    * Created by Karol Pasierb on 2017/10/08
-   *
-   ** Description:
-   *   
-   ** Future updates:
-   *   
-   ** Design Patterns Used:
-   *   
-   *
-   ** Last Update: 27/10/2017
    */
 
 
 using System;
 using System.Runtime.Serialization;
-using System.Windows;
-using System.Web.Script.Serialization;
+
 
 
 namespace ELM_HelperClasses
 {
-    [DataContract]
+    [DataContract(Namespace = "ELM_HelperClassesJSON")]
     public class Tweet : Message
     {
 
@@ -34,6 +24,7 @@ namespace ELM_HelperClasses
             get => MAXsenderLength;
             set => MAXsenderLength = value;
         }
+
 
         [DataMember]
         public override string header { get; set; }

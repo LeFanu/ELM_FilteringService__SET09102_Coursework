@@ -25,7 +25,7 @@
                 <DropShadowEffect BlurRadius="15" Color="#FF0C00FF"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="loadMessagesToProcessBTN" Content="Load Messages From File" Margin="0,530,152,0" VerticalAlignment="Top" Width="264" BorderBrush="Black" Background="#FFFFFBFB" Foreground="#FF000CFF" FontFamily="MS Office Symbol Bold" FontSize="20" Padding="10" RenderTransformOrigin="0.5,0.5" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" HorizontalAlignment="Right" Click="loadMessagesToProcessBTN_Click">
+        <Button x:Name="loadMessagesToProcessBTN" Content="Load Messages From File" Margin="0,530,152,0" VerticalAlignment="Top" Width="264" BorderBrush="Black" Background="#FFFFFBFB" Foreground="#FF000CFF" FontFamily="MS Office Symbol Bold" FontSize="20" Padding="10" RenderTransformOrigin="0.5,0.5" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" HorizontalAlignment="Right" IsEnabled="False">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="15" Color="#FF0C00FF"/>
             </Button.Effect>

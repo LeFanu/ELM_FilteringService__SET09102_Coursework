@@ -1,21 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ELM_HelperClasses;
-using Microsoft.Win32;
 using SE_Coursework;
 
 
@@ -264,44 +252,33 @@ namespace ELM_FilteringService
             }
         }
 
-        private void loadMessagesToProcessBTN_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "JSON files (*.json, *.JSON) | *.json; *.JSON;";
-            dialog.InitialDirectory = @"C:\";
-            dialog.Title = "Please select a JSON messages file to upload.";
-            // Show open file dialog box 
-            Nullable<bool> result = dialog.ShowDialog();
+        //private void loadMessagesToProcessBTN_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OpenFileDialog dialog = new OpenFileDialog();
+        //    dialog.Filter = "JSON files (*.json, *.JSON) | *.json; *.JSON;";
+        //    dialog.InitialDirectory = @"C:\";
+        //    dialog.Title = "Please select a JSON messages file to upload.";
+        //    // Show open file dialog box 
+        //    Nullable<bool> result = dialog.ShowDialog();
            
 
-            if (result == true)
-            {
-                // Open document 
+        //    if (result == true)
+        //    {
+        //        // Open document 
+        //        // Deserializing json data to object  
+        //        StreamReader sr = new StreamReader(dialog.FileName);
+        //        string jsonFile = sr.ReadToEnd();
+        //        MessageBox.Show(jsonFile);
 
-                // Deserializing json data to object  
-                StreamReader sr = new StreamReader(dialog.FileName);
-                string jsonFile = sr.ReadToEnd();
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-                dynamic JSONfileData = serializer.Deserialize<dynamic>(jsonFile);
-                MessageBox.Show(jsonFile);
-
-
+        //        DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(Message));
+        //        MemoryStream ms = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(jsonFile));
                 
-                //MessageBox.Show();
-                //sr.Close();
+        //        object fireBall = js.ReadObject(ms);
+        //        MessageBox.Show(fireBall.GetType().ToString());
+        //       // MessageBox.Show(fireBall.sender + " " + fireBall.body);
+        //    }
+        //}
 
-
-                //Message blogObject = js.Deserialize<Message>(jsonData);
-                //string name = blogObject.Name;
-                //string description = blogObject.Description;
-
-                //// Other way to whithout help of BlogSites class  
-                //dynamic blogObject = js.Deserialize<dynamic>(jsonData);
-                //string name = blogObject["Name"];
-                //string description = blogObject["Description"];
-
-            }
-        }
 
         //actions to perform when the user finishes the session
         private void ELM_Filtering_Service_Closed(object sender, EventArgs e)
@@ -309,5 +286,7 @@ namespace ELM_FilteringService
             Window outputSession = new InputSessionDisplay();
             outputSession.ShowDialog();
         }
+
+
     }
 }
