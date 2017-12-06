@@ -5,15 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE_Coursework"
         mc:Ignorable="d"
-        Title="SentMessageOutput" Height="487" Width="514" Background="#FF9C9C9C">
+        Title="SentMessageOutput" Height="667" Width="514" Background="#FF9C9C9C">
     <Grid>
-        <Button x:Name="closeSentMessageOutputBTN" Content="Close" Margin="10,402,0,0" VerticalAlignment="Top" Width="105" BorderBrush="Black" Background="#FFFFFBFB" Foreground="#FF000CFF" FontFamily="MS Office Symbol Bold" FontSize="20" Padding="10" RenderTransformOrigin="0.5,0.5" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" HorizontalAlignment="Center" Click="closeSentMessageOutputBTN_Click">
+        <Button x:Name="closeSentMessageOutputBTN" Content="Close" Margin="200,565,0,0" VerticalAlignment="Top" Width="105" BorderBrush="Black" Background="#FFFFFBFB" Foreground="#FF000CFF" FontFamily="MS Office Symbol Bold" FontSize="20" Padding="10" RenderTransformOrigin="0.524,0.295" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" HorizontalAlignment="Left" Click="closeSentMessageOutputBTN_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="15" Color="#FF0C00FF"/>
             </Button.Effect>
         </Button>
         <Label x:Name="sendSuccessLBL" Content="Your message was successfully sent!" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Background="#FFCDCCCC" FontFamily="Trebuchet MS" FontSize="20" FontWeight="Bold" Foreground="#FF2100F5" BorderBrush="#FF5241FF" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
-        <TextBlock x:Name="jsonTXTblock" HorizontalAlignment="Left" Margin="30,80,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="0.551,0.312" Height="305" Width="445" FontFamily="Lucida Console" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBlock x:Name="jsonTXTblock" HorizontalAlignment="Left" Margin="30,405,0,0" TextWrapping="WrapWithOverflow" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="0.551,0.312" Height="155" Width="445" FontFamily="Lucida Console" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="5"/>
+        <Label x:Name="label" Content="MessageID" HorizontalAlignment="Left" Margin="30,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.132,0.577" FontSize="16" FontFamily="Lucida Console"/>
+        <Label x:Name="messageID_LBL" Content="MessageID" HorizontalAlignment="Left" Margin="132,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.132,0.577" FontSize="16" FontFamily="Lucida Console" Width="133" Background="White"/>
+        <Label x:Name="label_Copy" Content="Sender" HorizontalAlignment="Left" Margin="30,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.132,0.577" FontSize="16" FontFamily="Lucida Console"/>
+        <Label x:Name="senderLBL" Content="Sender" HorizontalAlignment="Left" Margin="132,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.132,0.577" FontSize="16" FontFamily="Lucida Console" Width="133" Background="White"/>
+        <Label x:Name="label_Copy1" Content="Subject" HorizontalAlignment="Left" Margin="30,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.132,0.577" FontSize="16" FontFamily="Lucida Console"/>
+        <Label x:Name="subjectLBL" Content="Sender" HorizontalAlignment="Left" Margin="132,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.132,0.577" FontSize="16" FontFamily="Lucida Console" Width="301" Background="White"/>
+        <Label x:Name="message" Content="Subject" HorizontalAlignment="Left" Margin="30,180,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.132,0.577" FontSize="16" FontFamily="Lucida Console"/>
+        <TextBlock x:Name="messageBodyTXT" HorizontalAlignment="Left" Margin="30,211,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="174" Width="445" Background="White" FontFamily="Lucida Console" FontSize="16" Padding="5"/>
 
     </Grid>
 </Window>

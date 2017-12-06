@@ -69,14 +69,12 @@ namespace ELM_FilteringService
                     {
                         //when the objects were created and messages processed all the lists are saved to the file to avoid loosing any data
                         messageToSend.processMessage();
-                        //SMS newSms = (SMS) messageToSend;
-                        //String json = newSms.exportToJSON();
                         String json = messageToSend.exportToJSON();
                         dbAccess.SaveFiles();
                         senderTXT.Clear();
                         messageBodyTXT.Clear();
                         emailSubjectTXT.Clear();
-                        Window sentMessageOutput = new SentMessageOutput(json);
+                        Window sentMessageOutput = new SentMessageOutput(json, messageToSend);
                         sentMessageOutput.ShowDialog();
                     }
 
